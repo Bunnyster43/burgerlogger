@@ -1,0 +1,64 @@
+{{!-- image --}}
+<p>
+<img src="../assets/img/Hamburger-PNG-HD.png" style="padding:5px; width:100px; height:100px; border:0">
+<img src="../assets/img/Hamburger-PNG-HD 2.png"style="padding:5px; width:100px; height:100px; border:0">
+<img src="../assets/img/Hamburger-PNG-HD copy.png" style="padding:5px; width:100px; height:100px; border:0">
+</p>
+
+{{!-- header --}}
+<h1>Eat-Da-Burger!</h1>
+
+<h1>It's 3 And A Half Burger Good!</h1>
+
+{{!-- custom --}}
+<h2>Custom Burger</h2>
+<ul>
+<div class="main-form">
+  <form class="form" action="/" method="POST">
+    <div class="form">
+      <input type="text" id="burger" name="name" placeholder="custom burger"/>
+    </div>
+  <button type="submit" class="custom">
+    Customize
+  </button>
+</form>
+</div>
+</ul>
+
+{{!-- order --}}
+<div class="column" style="background-color:lemonchiffon;">
+    <h2>Order Here</h2>
+  <p>
+{{#each burgers}}
+{{#if this.devoured}}
+{{this.burger_name}}
+<form action="/{{this.id}}?_method=PUT" method="POST">
+  <input type="hidden" name="devoured" value="false">
+    <button type="submit" class="order">
+      Devour it
+    </button>
+   </input>
+</form>
+{{/if}}
+{{/each}}
+  </p>
+</div>
+
+{{!-- devoured --}}
+<div class="column" style="background-color:lemonchiffon;">
+    <h2>Devoured</h2>
+  <p>
+{{#each burgers}}
+{{#unless this.devoured}}
+{{this.burger_name}}
+<form action="/{{this.id}}?_method=PUT" method="POST">
+  <input type="hidden" name="devoured" value="true">
+   <button type="submit" class="devour">
+      Order Again
+   </button>
+  </input>
+</form>
+{{/unless}}
+{{/each}}
+  </p>
+</div>
